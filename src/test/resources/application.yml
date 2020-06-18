@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:library-test.db
+    username: sa
+    password: sa
+    driver-class-name: org.sqlite.JDBC
+    initialization-mode: always
+    schema: schema.sql
+    data: data.sql

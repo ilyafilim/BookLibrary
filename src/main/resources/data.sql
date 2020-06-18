@@ -1,0 +1,1 @@
+insert or ignore into authors (name) values ('Rick Dalton');
