@@ -15,7 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @JdbcTest
 @Import(AuthorDaoJdbc.class)
-class AuthorDaoJdbcTest {
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+public class AuthorDaoJdbcTest {
 
     private static final int REAL_COUNT = 1;
     private static final int REAL_COUNT_AFTER_INSERT = REAL_COUNT + 1;
@@ -38,7 +39,7 @@ class AuthorDaoJdbcTest {
 
     @Test
     void deleteById() {
-        dao.getById(1L);
+        dao.deleteById(1L);
         assertEquals(dao.count(), NO_AUTHORS);
     }
 

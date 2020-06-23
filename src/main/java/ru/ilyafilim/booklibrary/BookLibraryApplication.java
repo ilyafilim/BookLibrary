@@ -11,12 +11,6 @@ public class BookLibraryApplication {
 
     public static void main(String[] args) throws SQLException {
         ApplicationContext context = SpringApplication.run(BookLibraryApplication.class, args);
-
-        /*AuthorDao authorDao = context.getBean(AuthorDao.class);
-
-        Author author = authorDao.getById(2L);
-
-        System.out.println(author.getName());*/
     }
 
 }
