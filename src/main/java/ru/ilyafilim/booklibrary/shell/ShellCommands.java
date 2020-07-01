@@ -1,3 +1,4 @@
+/*
 package ru.ilyafilim.booklibrary.shell;
 
 import org.springframework.shell.standard.ShellComponent;
@@ -6,9 +7,6 @@ import org.springframework.shell.standard.ShellOption;
 import ru.ilyafilim.booklibrary.domain.Author;
 import ru.ilyafilim.booklibrary.domain.Book;
 import ru.ilyafilim.booklibrary.domain.Genre;
-import ru.ilyafilim.booklibrary.repositories.AuthorRepositoryJpa;
-import ru.ilyafilim.booklibrary.repositories.BookRepositoryJpa;
-import ru.ilyafilim.booklibrary.repositories.GenreRepositoryJpa;
 
 @ShellComponent
 public class ShellCommands {
@@ -94,3 +92,4 @@ public class ShellCommands {
         return bookJpa.findAll().toString();
     }
 }
+*/
