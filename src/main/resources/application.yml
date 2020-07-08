@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      database: companyg
+
+logging:
+  level:
+    ROOT: ERROR
