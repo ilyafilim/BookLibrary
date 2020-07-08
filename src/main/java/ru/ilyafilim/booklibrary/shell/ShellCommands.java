@@ -25,14 +25,14 @@ public class ShellCommands {
         this.genreRepository = genreRepository;
     }
 
-    @ShellMethod(key = "author.insert", value = "Добавить автора")
+    @ShellMethod(key = "author.add", value = "Добавить автора")
     public String insertAuthor(@ShellOption({"name"}) String name) {
-        authorRepository.save(new Author(0, name));
+        authorRepository.save(new Author(name));
         return "ok!";
     }
 
     @ShellMethod(key = "author.get", value = "Получить автора по айди")
-    public String getAuthor(@ShellOption({"id"}) long id) {
+    public String getAuthor(@ShellOption({"id"}) String id) {
         return authorRepository.findById(id).toString();
     }
 
@@ -43,14 +43,14 @@ public class ShellCommands {
 
     //
 
-    @ShellMethod(key = "genre.insert", value = "Добавить жанр")
+    @ShellMethod(key = "genre.add", value = "Добавить жанр")
     public String insertGenre(@ShellOption({"name"}) String name) {
-        genreRepository.save(new Genre(0, name));
+        genreRepository.save(new Genre(name));
         return "ok!";
     }
 
     @ShellMethod(key = "genre.get", value = "Получить жанр по айди")
-    public String getGenre(@ShellOption({"id"}) long id) {
+    public String getGenre(@ShellOption({"id"}) String id) {
         return genreRepository.findById(id).toString();
     }
 
@@ -66,26 +66,30 @@ public class ShellCommands {
         return bookRepository.count() + "";
     }
 
-    @ShellMethod(key = "book.insert", value = "Добавить книгу")
-    public String insertBook(@ShellOption({"name"}) String name, @ShellOption({"authorId"}) long authorId, @ShellOption({"genreId"}) long genreId) {
-        bookRepository.save(new Book(0, name, new Author(authorId, null), new Genre(genreId, null)));
+    @ShellMethod(key = "book.add", value = "Добавить книгу")
+    public String insertBook(@ShellOption({"name"}) String name, @ShellOption({"authorId"}) String authorId, @ShellOption({"genreId"}) String genreId) {
+        final Book book = new Book();
+        book.setName(name);
+        book.setAuthor(authorRepository.findById(authorId).orElse(null));
+        book.setGenre(genreRepository.findById(genreId).orElse(null));
+        bookRepository.save(book);
         return "ok!";
     }
 
     @ShellMethod(key = "book.update", value = "Обновить название книги по айди")
-    public String updateBook(@ShellOption({"id"}) long id, @ShellOption({"name"}) String name) {
+    public String updateBook(@ShellOption({"id"}) String id, @ShellOption({"name"}) String name) {
         bookRepository.save(new Book(id, name, null, null));
         return "ok!";
     }
 
     @ShellMethod(key = "book.delete", value = "Удалить книгу по айди")
-    public String deleteBook(@ShellOption({"id"}) long id) {
+    public String deleteBook(@ShellOption({"id"}) String id) {
         bookRepository.deleteById(id);
         return "ok!";
     }
 
     @ShellMethod(key = "book.get", value = "Получить книгу по айди")
-    public String getBook(@ShellOption({"id"}) long id) {
+    public String getBook(@ShellOption({"id"}) String id) {
         return bookRepository.findById(id).toString();
     }
 

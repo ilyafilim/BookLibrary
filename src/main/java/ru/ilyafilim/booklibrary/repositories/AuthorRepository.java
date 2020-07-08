@@ -1,8 +1,10 @@
 package ru.ilyafilim.booklibrary.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 import ru.ilyafilim.booklibrary.domain.Author;
 
-public interface AuthorRepository extends JpaRepository<Author, Long> {
+@Repository
+public interface AuthorRepository extends MongoRepository<Author, String> {
 
 }

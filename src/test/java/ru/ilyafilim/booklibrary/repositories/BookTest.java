@@ -24,7 +24,7 @@ class BookTest {
 
     @Test
     void testFindBook() {
-        Book book = repository.getOne(2L);
+        Book book = repository.findById("2").orElseThrow(NullPointerException::new);
         assertEquals(book.getName(), BOOK_NAME);
     }
 

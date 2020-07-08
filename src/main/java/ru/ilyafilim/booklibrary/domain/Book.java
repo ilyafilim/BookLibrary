@@ -1,30 +1,30 @@
 package ru.ilyafilim.booklibrary.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "books")
+@RequiredArgsConstructor
+@Document(collection = "books")
 public class Book {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(name = "name", nullable = false, unique = true)
+    @MongoId
+    private String id;
+    @Field
+    @NonNull
     private String name;
-
-    @ManyToOne(targetEntity = Author.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "author_id")
+    @NonNull
+    @DBRef(db = "authors")
+    @Field
     private Author author;
-
-    @ManyToOne(targetEntity = Genre.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "genre_id")
+    @NonNull
+    @DBRef(db = "genres")
+    @Field
     private Genre genre;
 }
