@@ -1,11 +1,8 @@
 package ru.ilyafilim.booklibrary.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.ilyafilim.booklibrary.domain.Author;
 import ru.ilyafilim.booklibrary.domain.Book;
 import ru.ilyafilim.booklibrary.domain.Genre;
@@ -18,20 +15,16 @@ import java.util.List;
 @Controller
 public class LibraryController {
 
-    @Autowired
-    BookRepository bookRepository;
+    final BookRepository bookRepository;
 
-    @Autowired
-    AuthorRepository authorRepository;
+    final AuthorRepository authorRepository;
 
-    @Autowired
-    GenreRepository genreRepository;
+    final GenreRepository genreRepository;
 
-    @GetMapping("/")
-    public String booksPage(Model model) {
-        List<Book> books = bookRepository.findAll();
-        model.addAttribute("books", books);
-        return "index";
+    public LibraryController(BookRepository bookRepository, AuthorRepository authorRepository, GenreRepository genreRepository) {
+        this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
+        this.genreRepository = genreRepository;
     }
 
     @GetMapping("/edit")
@@ -69,9 +62,9 @@ public class LibraryController {
             return "delete";
         }
         if (buttonSubmit != null) {
-            bookRepository.deleteById(id);
+            bookRepository.deleteBookById(id);
         }
-        return "redirect:/";
+        return "redirect:/index.html";
     }
 
     @GetMapping("/add")
@@ -91,6 +84,6 @@ public class LibraryController {
         Author author = authorRepository.findById(authorId).orElseThrow(NullPointerException::new);
         Genre genre = genreRepository.findById(genreId).orElseThrow(NullPointerException::new);
         bookRepository.save(new Book(0, name, author, genre));
-        return "redirect:/";
+        return "redirect:/index.html";
     }
 }
