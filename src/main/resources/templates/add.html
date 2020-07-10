@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление книги</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<form id="edit-form" th:action="@{/add}" th:method="post" action="add.html">
+    <h1>Заполните информацию о книге:</h1>
+
+    <div class="row">
+        <label for="name-input">Название:</label>
+        <input placeholder="Название..." id="name-input" name="name" type="text"/>
+    </div>
+
+    <div class="row">
+        <label for="author-select">Автор:</label>
+        <select id="author-select" name="author">
+            <option th:each="author : ${authors}" th:value="${author.id}" th:utext="${author.name}">Joe Restor</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <label for="genre-select">Жанр:</label>
+        <select id="genre-select" name="genre">
+            <option th:each="genre : ${genres}" th:value="${genre.id}" th:utext="${genre.name}">Horror</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <button type="submit">Добавить</button>
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Удалить книгу</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Удаление книги:</h1>
+<form id="edit-form" th:action="@{/delete(id=${book.id})}" th:method="get" action="../static/index.html">
+    <div class="row">
+        <button type="submit" name="return" value="ok">Назад</button>
+    </div>
+
+    <h3>Вы подтверждаете удаление книги?</h3>
+    <div class="row">
+        <label for="id-input">ID книги:</label>
+        <input id="id-input" type="text" readonly="readonly" name="id" th:value="${book.id}" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="name-input">Название:</label>
+        <input readonly="readonly" id="name-input" name="name" type="text" th:value="${book.name}"
+               value="Superrr Book!"/>
+    </div>
+
+    <div class="row">
+        <label for="author-select">Автор:</label>
+        <select disabled id="author-select" name="author">
+            <option selected th:value="${book.author.id}" th:utext="${book.author.name}">Joe Restor</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <label for="genre-select">Жанр:</label>
+        <select disabled id="genre-select" name="genre">
+            <option selected th:value="${book.genre.id}" th:utext="${book.genre.name}">Horror</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <button type="submit" name="submit" value="ok">Удалить</button>
+    </div>
+</form>
+</body>
+</html>
