@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .books, .books td {
+            border: 1px solid #000000;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Книги:</h1>
+
+<table class="books">
+    <thead th:class="'table ' + ${books.size()}">
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Автор</th>
+        <th>Жанр</th>
+        <th>Править</th>
+        <th>Удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">1</td>
+        <td th:text="${book.name}">Example Book</td>
+        <td th:text="${book.author.name}">John Doe</td>
+        <td th:text="${book.genre.name}">Horror</td>
+        <td>
+            <a th:href="@{/edit(id=${book.id})}" href="edit.html">Правка</a>
+        </td>
+        <td>
+            <a th:href="@{/delete(id=${book.id})}" href="delete.html">Удаление</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+    <form action="/add" method="get">
+        <button type="submit">Добавить книгу</button>
+    </form>
+</body>
+</html>
